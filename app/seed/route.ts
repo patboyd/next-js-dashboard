@@ -1,7 +1,5 @@
 import bcrypt from 'bcrypt';
 import { invoices, customers, revenue, users } from '../lib/placeholder-data';
-import { env } from 'process';
-import pg from 'pg'
 
 import { getClient } from "../lib/db"
 
