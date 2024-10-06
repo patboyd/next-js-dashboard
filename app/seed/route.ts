@@ -3,9 +3,9 @@ import { invoices, customers, revenue, users } from '../lib/placeholder-data';
 import { env } from 'process';
 import pg from 'pg'
 
-const { Client } = pg
-const client = new Client(env.POSTGRES_URL)
-await client.connect();
+import { getClient } from "../lib/db"
+
+const client = await getClient();
 
 async function seedUsers() {
   await client.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
