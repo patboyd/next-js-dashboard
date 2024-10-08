@@ -92,10 +92,8 @@ export async function fetchFilteredInvoices(
   currentPage: number,
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-
   try {
-    const invoices = await client.query<InvoicesTable>(`
-      SELECT
+    const invoices = await client.query<InvoicesTable>(`SELECT
         invoices.id,
         invoices.amount,
         invoices.date,
@@ -106,11 +104,11 @@ export async function fetchFilteredInvoices(
       FROM invoices
       JOIN customers ON invoices.customer_id = customers.id
       WHERE
-        customers.name ILIKE ${`%${query}%`} OR
-        customers.email ILIKE ${`%${query}%`} OR
-        invoices.amount::text ILIKE ${`%${query}%`} OR
-        invoices.date::text ILIKE ${`%${query}%`} OR
-        invoices.status ILIKE ${`%${query}%`}
+        customers.name ILIKE '%${query}%' OR
+        customers.email ILIKE '%${query}%' OR
+        invoices.amount::text ILIKE '%${query}%' OR
+        invoices.date::text ILIKE '%${query}%' OR
+        invoices.status ILIKE '%${query}%'
       ORDER BY invoices.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `);
